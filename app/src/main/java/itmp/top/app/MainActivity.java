@@ -5,8 +5,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -20,12 +20,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView)findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
         PackageInfo packageInfo = null;
 
         final ArrayList<String> arrayList = new ArrayList<>();
@@ -33,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             packageInfo = getPackageManager().getPackageInfo(this.getPackageName(), PackageManager.GET_ACTIVITIES);
-        }catch (PackageManager.NameNotFoundException e){
+        } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        for(ActivityInfo activityInfo : packageInfo.activities){
+        for (ActivityInfo activityInfo : packageInfo.activities) {
             //Log.v("info", activityInfo.toString());
             //mActivities = new ArrayList<ActivityInfo>(Arrays.asList(packageInfo.activities));
-            if(activityInfo.parentActivityName != null){
+            if (activityInfo.parentActivityName != null) {
                 classNames.add(activityInfo.name);
                 arrayList.add(activityInfo.name.substring(activityInfo.name.lastIndexOf('.') + 1));
             }
