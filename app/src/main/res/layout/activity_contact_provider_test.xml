@@ -14,14 +14,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/text"
         android:paddingTop="18dp"
-        android:text="联系人姓名: "/>
+        android:text="联系人姓名: " />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="11"
         android:id="@+id/name"
-        android:layout_toRightOf="@+id/text"
-        />
+        android:layout_toRightOf="@+id/text" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,16 +30,16 @@
         android:text="电话: "
         android:paddingTop="18dp"
         android:layout_below="@+id/text"
-        android:layout_alignRight="@+id/text"
-        />
+        android:layout_alignRight="@+id/text" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="11"
         android:id="@+id/phone"
         android:layout_below="@+id/text"
-        android:layout_toRightOf="@+id/text2"
-        />
+        android:layout_toRightOf="@+id/text2" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,15 +47,15 @@
         android:text="Email: "
         android:paddingTop="18dp"
         android:layout_below="@+id/phone"
-        android:layout_alignRight="@+id/text"/>
+        android:layout_alignRight="@+id/text" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="11"
         android:id="@+id/email"
         android:layout_below="@+id/phone"
-        android:layout_toRightOf="@+id/text3"
-        />
+        android:layout_toRightOf="@+id/text3" />
 
     <Button
         android:layout_width="wrap_content"
