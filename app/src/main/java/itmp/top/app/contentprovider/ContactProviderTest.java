@@ -3,8 +3,11 @@ package itmp.top.app.contentprovider;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,12 +16,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -32,6 +38,9 @@ public class ContactProviderTest extends AppCompatActivity {
     private final int REQUIREPERMISSION_RTN = 0x11;
     private Button query;
     private Button add;
+    private EditText name;
+    private EditText phone;
+    private EditText email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,9 @@ public class ContactProviderTest extends AppCompatActivity {
 
         query = (Button) findViewById(R.id.query);
         add = (Button) findViewById(R.id.add);
+        name = (EditText) findViewById(R.id.name);
+        phone = (EditText) findViewById(R.id.phone);
+        email = (EditText) findViewById(R.id.email);
 
         query.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +66,61 @@ public class ContactProviderTest extends AppCompatActivity {
                 }
             }
         });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(ContactProviderTest.this,
+                        Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ContactProviderTest.this,
+                            new String[]{Manifest.permission.READ_CONTACTS},
+                            REQUIREPERMISSION_RTN);
+                } else {
+                    writeContacts();
+                }
+            }
+        });
     }
 
     public void readContacts() {
         AsyncReadContacts asyncReadContacts = new AsyncReadContacts();
         asyncReadContacts.execute();
+    }
+
+    public void writeContacts() {
+        String cName = name.getText().toString();
+        String cPhone = phone.getText().toString();
+        String cEmail = email.getText().toString();
+
+        if (!TextUtils.isEmpty(cName) && !TextUtils.isEmpty(cPhone) && !TextUtils.isEmpty(cEmail)) {
+            Log.v("mem", cName + cPhone + cEmail);
+            ContentValues contentValues = new ContentValues();
+            Uri rawContactUri = getContentResolver().insert(ContactsContract.RawContacts.CONTENT_URI, contentValues);
+            long rawContactId = ContentUris.parseId(rawContactUri);
+            contentValues.clear();
+
+            contentValues.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
+            contentValues.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);
+            contentValues.put(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME, cName);
+            getContentResolver().insert(ContactsContract.Data.CONTENT_URI, contentValues);
+            contentValues.clear();
+
+            contentValues.put(ContactsContract.CommonDataKinds.StructuredName.RAW_CONTACT_ID, rawContactId);
+            contentValues.put(ContactsContract.CommonDataKinds.StructuredName.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
+            contentValues.put(ContactsContract.CommonDataKinds.Phone.NUMBER, cPhone);
+            contentValues.put(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
+            getContentResolver().insert(ContactsContract.Data.CONTENT_URI, contentValues);
+            contentValues.clear();
+
+            contentValues.put(ContactsContract.CommonDataKinds.StructuredName.RAW_CONTACT_ID, rawContactId);
+            contentValues.put(ContactsContract.CommonDataKinds.StructuredName.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE);
+            contentValues.put(ContactsContract.CommonDataKinds.Email.DATA, cEmail);
+            contentValues.put(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK);
+            getContentResolver().insert(ContactsContract.Data.CONTENT_URI, contentValues);
+            contentValues.clear();
+
+            Snackbar.make(query, "联系人添加成功", Snackbar.LENGTH_SHORT).setAction("", null).show();
+
+        }
     }
 
     @Override
