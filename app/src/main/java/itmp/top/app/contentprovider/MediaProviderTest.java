@@ -16,7 +16,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.SearchEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -93,6 +93,7 @@ public class MediaProviderTest extends Activity {
                     Map<String, Object> listItem = new HashMap<>();
                     listItem.put("name", names.get(i));
                     listItem.put("desc", descs.get(i));
+                    Log.v("lists", listItem.toString());
                     listItems.add(listItem);
                 }
                 // 创建一个SimpleAdapter
