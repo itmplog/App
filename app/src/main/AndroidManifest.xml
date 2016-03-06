@@ -76,18 +76,29 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".service.AlarmTest"
+        <activity
+            android:name=".service.AlarmTest"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".service.AlarmActiviity"
+        <activity
+            android:name=".service.AlarmActiviity"
             android:parentActivityName=".service.AlarmTest">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".service.AlarmTest" />
         </activity>
+        <activity
+            android:name=".service.MusicBox"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <service android:name=".service.MusicService"/>
     </application>
 
 </manifest>
