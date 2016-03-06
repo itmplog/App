@@ -49,32 +49,44 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".Service.TelephonyStatus"
+            android:name=".service.TelephonyStatus"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".Service.MonitorPhone"
+            android:name=".service.MonitorPhone"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".AudioTest"
+            android:name=".service.AudioTest"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".Service.ViberTest"
+            android:name=".service.ViberTest"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".service.AlarmTest"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".service.AlarmActiviity"
+            android:parentActivityName=".service.AlarmTest">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".service.AlarmTest" />
         </activity>
     </application>
 

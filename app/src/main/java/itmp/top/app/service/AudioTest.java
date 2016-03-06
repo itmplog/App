@@ -1,4 +1,4 @@
-package itmp.top.app;
+package itmp.top.app.service;
 
 import android.app.Activity;
 import android.app.Service;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ToggleButton;
+
+import itmp.top.app.R;
 
 
 public class AudioTest extends Activity {

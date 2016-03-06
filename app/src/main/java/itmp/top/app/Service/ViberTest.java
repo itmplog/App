@@ -1,4 +1,4 @@
-package itmp.top.app.Service;
+package itmp.top.app.service;
 
 import android.app.Service;
 import android.os.Bundle;
