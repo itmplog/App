@@ -54,6 +54,7 @@ public class AlarmTest extends AppCompatActivity {
                                 Intent intent = new Intent(AlarmTest.this, AlarmActiviity.class);
                                 final PendingIntent pi = PendingIntent.getActivity(AlarmTest.this, 0, intent, 0);
 
+                                view.clearFocus();
                                 Calendar calendar = Calendar.getInstance();
                                 calendar.setTimeInMillis(System.currentTimeMillis());
 
