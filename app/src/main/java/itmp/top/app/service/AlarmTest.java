@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +66,8 @@ public class AlarmTest extends AppCompatActivity {
                                 alarmManager.set(AlarmManager.RTC_WAKEUP,
                                         calendar.getTimeInMillis(), pi);
                                 Log.v("alrm", new Date(alarmManager.getNextAlarmClock().getTriggerTime()) + "");
+                                Log.v("nextalarm", Settings.System.getString(getContentResolver(),
+                                        Settings.System.NEXT_ALARM_FORMATTED));
 
                                 Snackbar.make(fab, "Alarm Set", Snackbar.LENGTH_SHORT).setAction("Undo" ,new FloatingActionButton.OnClickListener() {
                                     @Override
